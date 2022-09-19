@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
+	_ "github.com/adventureboss/the-elder-chores/migrations"
 )
 
 func main() {
