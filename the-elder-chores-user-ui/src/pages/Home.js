@@ -1,13 +1,6 @@
 import {Flex, FlexItem, PageSection, PageSectionVariants} from "@patternfly/react-core";
-import ProgressBar from "../components/ProgressBar";
 import StatsSection from "../components/StatsSection";
 import Level from "../components/Level";
-
-const Box = ({ children }) => (
-    <div>
-        { children }
-    </div>
-);
 
 const Home = () => {
     return (
