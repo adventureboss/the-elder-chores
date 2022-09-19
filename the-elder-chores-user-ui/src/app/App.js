@@ -1,14 +1,12 @@
 import * as React from 'react';
-import logo from './logo.svg';
 import '@patternfly/react-core/dist/styles/base.css';
 import './App.css';
 import {
-    Bullseye, Flex, FlexItem, Level,
+    Flex, FlexItem,
     Masthead,
-    MastheadBrand,
     MastheadContent,
     MastheadMain,
-    Page, PageSection, PageSectionVariants, Split, SplitItem, Text, TextContent, TextVariants,
+    Page, PageSection, PageSectionVariants, Text, TextContent, TextVariants,
     Toolbar,
     ToolbarContent, ToolbarItem
 } from "@patternfly/react-core";

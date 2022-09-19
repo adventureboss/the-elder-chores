@@ -1,5 +1,4 @@
 import {Split, SplitItem} from "@patternfly/react-core";
-import ProgressBar from "./ProgressBar";
 
 const Stats = ({stat, value}) => (
     <Split hasGutter>
