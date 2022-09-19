@@ -6,7 +6,7 @@ import {
     Masthead,
     MastheadContent,
     MastheadMain,
-    Page, PageSection, PageSectionVariants, Text, TextContent, TextVariants,
+    Page, PageSection, PageSectionVariants, Stack, StackItem, Text, TextContent, TextVariants,
     Toolbar,
     ToolbarContent, ToolbarItem
 } from "@patternfly/react-core";
@@ -42,35 +42,15 @@ const App = () => {
         </Flex>
       <Page header={ <Header /> }>
           <PageSection variant={ PageSectionVariants.dark }>
-              <TextContent>
-                  <Home />
-              </TextContent>
+              <Stack style={{alignItems: "center"}}>
+                  <StackItem>
+                      <Home />
+                  </StackItem>
+              </Stack>
           </PageSection>
       </Page>
     </React.Fragment>
   );
 }
 
-/*
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-*/
 export default App;
