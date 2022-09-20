@@ -1,4 +1,4 @@
-import {Split, SplitItem} from "@patternfly/react-core";
+import {Skeleton, Split, SplitItem} from "@patternfly/react-core";
 
 const Stats = ({stat, value}) => (
     <Split hasGutter>
@@ -6,7 +6,7 @@ const Stats = ({stat, value}) => (
             { stat }
         </SplitItem>
         <SplitItem style={{ marginRight: 5, marginLeft: 'auto'}}>
-            { value }
+            { value ?? <Skeleton width="40px" height="20px" /> }
         </SplitItem>
     </Split>
 );

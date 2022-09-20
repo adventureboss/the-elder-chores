@@ -6,14 +6,22 @@ import reportWebVitals from './reportWebVitals';
 import '@patternfly/react-core/dist/styles/base.css';
 import 'rpg-awesome/css/rpg-awesome.css';
 import { QueryClientProvider, QueryClient } from "react-query";
+import PocketBase from "pocketbase";
+import {PocketbaseProvider} from "./components/Pocketbase";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
+const pocketBaseclient = new PocketBase('/');
+
+// This needs to be called on login
+pocketBaseclient.users.authViaEmail('your-username', '123456789');
 
 ReactDOM.render(
   <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
+      <PocketbaseProvider client={pocketBaseclient}>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+      </PocketbaseProvider>
   </React.StrictMode>,
   document.body
 );

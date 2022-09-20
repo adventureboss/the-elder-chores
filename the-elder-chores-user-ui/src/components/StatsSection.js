@@ -1,8 +1,8 @@
 import {Stack, StackItem, Text, TextContent, TextVariants} from "@patternfly/react-core";
 import Stats from "./Stats";
 
-const StatsSection = () => (
-    <Stack>
+const StatsSection = ({str, dex, con, wis, int, cha}) => (
+    <Stack hasGutter>
         <StackItem style={{marginLeft: 'auto', marginRight: 'auto'} }>
             <TextContent>
                 <Text component={ TextVariants.h2 }>
@@ -11,12 +11,12 @@ const StatsSection = () => (
             </TextContent>
         </StackItem>
         <StackItem>
-            <Stats stat="STR" value={ 12 } />
-            <Stats stat="DEX" value={ 8 } />
-            <Stats stat="CON" value={ 9 } />
-            <Stats stat="WIS" value={ 6 } />
-            <Stats stat="INT" value={ 11 } />
-            <Stats stat="CHA" value={ 15 } />
+            <Stats stat="STR" value={ str } />
+            <Stats stat="DEX" value={ dex } />
+            <Stats stat="CON" value={ con } />
+            <Stats stat="WIS" value={ wis } />
+            <Stats stat="INT" value={ int } />
+            <Stats stat="CHA" value={ cha } />
         </StackItem>
     </Stack>
 );
