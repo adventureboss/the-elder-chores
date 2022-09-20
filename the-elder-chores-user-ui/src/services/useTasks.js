@@ -1,18 +1,12 @@
 import {useQuery} from "react-query";
-import PocketBase from 'pocketbase';
+import {usePocketbase} from "../components/Pocketbase";
 
 const useTasks = () => {
+    const client = usePocketbase();
+
     return useQuery({
-        queryKey: [ 'tasks' ],
+        queryKey: [ `tasks-for-${client.authStore.model.id}` ],
         queryFn: async() => {
-            const client = new PocketBase('/');
-
-            // not required here, we should ensure we don't use this api unless we are logged in as users
-            if (!client.authStore.isValid) {
-                // This needs to be called on login
-                const user = await client.users.authViaEmail('your-user', '123456789');
-            }
-
             return await client.records.getList('tasks');
         }
     });

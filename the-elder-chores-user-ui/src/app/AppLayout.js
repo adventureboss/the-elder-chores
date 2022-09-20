@@ -4,7 +4,7 @@ import {
   Masthead,
   MastheadContent,
   MastheadMain,
-  Page, PageSection, PageSectionVariants, Stack, StackItem, Text, TextContent, TextVariants,
+  Page, PageSection, PageSectionVariants, Stack, StackItem,
   Toolbar,
   ToolbarContent, ToolbarItem
 } from "@patternfly/react-core";
