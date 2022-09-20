@@ -45,8 +45,6 @@ Once the build is complete. The backend command to serve the website will serve 
 
 The frontend UI elements are all located in [the-elder-chores-user-ui](./the-elder-chores-user-ui/).
 
-To install the frontend, run `yarn install` inside the ui directory.
-
 ### Note on Fedora 36
 
 Fedora 36 has some quirks related to node. If you run into openssl errors, you have to do a couple of things.
