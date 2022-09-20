@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 const pocketBaseclient = new PocketBase('/');
 
 // This needs to be called on login
-pocketBaseclient.users.authViaEmail('your-username', '123456789');
+pocketBaseclient.users.authViaEmail('sam@test.com', 'password123');
 
 ReactDOM.render(
   <React.StrictMode>
