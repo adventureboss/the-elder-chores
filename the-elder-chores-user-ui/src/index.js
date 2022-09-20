@@ -4,10 +4,16 @@ import './index.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import '@patternfly/react-core/dist/styles/base.css';
+import 'rpg-awesome/css/rpg-awesome.css';
+import { QueryClientProvider, QueryClient } from "react-query";
+
+const queryClient = new QueryClient()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
   </React.StrictMode>,
   document.body
 );

@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.pf-c-skeleton {
+  --pf-c-skeleton--BackgroundColor: #a1a0a0 !important;
+  --pf-c-skeleton--after--LinearGradientColorStop1: #a1a0a0 !important;
+  --pf-c-skeleton--after--LinearGradientColorStop2: #6c6c6c !important;
+  --pf-c-skeleton--after--LinearGradientColorStop3: #a1a0a0 !important;
+}
