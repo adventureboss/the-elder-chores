@@ -36,6 +36,13 @@ pocketbase.
 
 ## Frontend UI
 
+To run the frontend UI along with backend, you must build the frontend first:
+
+    npm run build
+
+Once the build is complete. The backend command to serve the website will serve both. The UI will be located at
+'/'
+
 The frontend UI elements are all located in [the-elder-chores-user-ui](./the-elder-chores-user-ui/).
 
 To install the frontend, run `yarn install` inside the ui directory.
