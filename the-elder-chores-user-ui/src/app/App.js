@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useQuery } from "react-query";
-import { pocketBaseClient } from '../config';
+import { usePocketbase } from "../components/Pocketbase";
 import '@patternfly/react-core/dist/styles/base.css';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -9,8 +9,10 @@ import AppRoutes from './AppRoutes';
 
 const App = () => {
 
+  const client = usePocketbase();
+
   const getUser = async()=>{
-    return pocketBaseClient.authStore.model
+    return client.authStore.model
   }
 
   const userQuery = useQuery("user", getUser);
