@@ -9,8 +9,8 @@ import 'rpg-awesome/css/rpg-awesome.css';
 import { QueryClient, QueryClientProvider } from "react-query";
 import { PocketbaseProvider } from "./components/Pocketbase";
 
-export const queryClient = new QueryClient();
-export const pocketBaseClient = new PocketBase('/');
+const queryClient = new QueryClient();
+const pocketBaseClient = new PocketBase('/');
 
 ReactDOM.render(
   <React.StrictMode>
