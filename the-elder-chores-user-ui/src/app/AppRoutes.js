@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
 import Quests from "../pages/Quests";
 import Shop from "../pages/Shop";
+import Login from "../pages/Login/Login";
 
 const AppRoutes = () => {
   return (
