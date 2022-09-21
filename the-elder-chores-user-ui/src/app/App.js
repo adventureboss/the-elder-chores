@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useQuery } from "react-query";
+import {useQuery, useQueryClient} from "react-query";
 import { usePocketbase } from '../components/Pocketbase';
 import '@patternfly/react-core/dist/styles/base.css';
 import './App.css';
@@ -10,8 +10,15 @@ import AppRoutes from './AppRoutes';
 const App = () => {
 
   const client = usePocketbase();
+  const queryClient = useQueryClient();
+
+  client.authStore.onChange(() => {
+    console.log('invalidating user');
+    queryClient.invalidateQueries("user");
+  });
 
   const getUser = async()=>{
+    console.log('fetched user');
     return client.authStore.model
   }
 
@@ -34,6 +41,8 @@ const App = () => {
 
   const user = userQuery.data
 
+  console.log('user', user);
+
   return (
     <Router>
       <AppLayout user={user}>
@@ -44,4 +53,3 @@ const App = () => {
 }
 
 export default App;
- 

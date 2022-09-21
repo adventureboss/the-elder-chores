@@ -1,20 +1,35 @@
 import React, { useState } from 'react';
-import { pocketBaseClient as client } from '../../config';
 import './Login.css';
+import {usePocketbase} from "../../components/Pocketbase";
+import {Alert} from "@patternfly/react-core";
 
 const Login = () => {
+  const client = usePocketbase();
 
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    return client.users.authViaEmail(username, password);
+    setError(undefined);
+    try {
+      await client.users.authViaEmail(username, password);
+    } catch (err) {
+      if (err.status === 400) {
+        setError("Invalid username or password.");
+      } else {
+        setError("Something wrong happened when trying to login. Please try again.");
+      }
+    }
   }
 
   return(
     <div className="login-wrapper">
       <h1>Please Log In</h1>
+      { error && (
+        <Alert isInline variant="danger" title={error} />
+      )}
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
