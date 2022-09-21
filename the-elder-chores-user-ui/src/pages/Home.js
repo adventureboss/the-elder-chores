@@ -86,7 +86,6 @@ const Home = () => {
                 isLoading={ taskFinisher.isLoading }
                 onFinish={async () => {
                     await taskFinisher.mutateAsync(taskToFinish.id);
-                    await tasks.refetch();
                     setTaskToFinish(undefined);
                 }}
                 onClose={() => setTaskToFinish(undefined)}
