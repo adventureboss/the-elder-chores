@@ -7,7 +7,9 @@ const useTasks = () => {
     return useQuery({
         queryKey: [ `tasks-for-${client.authStore.model.id}` ],
         queryFn: async() => {
-            return await client.records.getList('tasks');
+            return await client.records.getList('tasks', undefined, undefined, {
+                sort: 'complete,-id'
+            });
         }
     });
 };
