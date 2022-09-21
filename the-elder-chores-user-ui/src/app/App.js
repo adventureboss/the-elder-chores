@@ -13,12 +13,10 @@ const App = () => {
   const queryClient = useQueryClient();
 
   client.authStore.onChange(() => {
-    console.log('invalidating user');
     queryClient.invalidateQueries("user");
   });
 
   const getUser = async()=>{
-    console.log('fetched user');
     return client.authStore.model
   }
 
@@ -40,8 +38,6 @@ const App = () => {
   }
 
   const user = userQuery.data
-
-  console.log('user', user);
 
   return (
     <Router>
