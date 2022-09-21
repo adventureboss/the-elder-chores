@@ -6,7 +6,7 @@ import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import '@patternfly/react-core/dist/styles/base.css';
 import 'rpg-awesome/css/rpg-awesome.css';
-import { QueryClientProvider, QueryClient } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { PocketbaseProvider } from "./components/Pocketbase";
 
 export const queryClient = new QueryClient();

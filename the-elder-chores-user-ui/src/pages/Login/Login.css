@@ -1,3 +1,11 @@
+input {
+    color: black;
+}
+
+button {
+    color: black;
+}
+
 .login-wrapper {
     display: flex;
     flex-direction: column;

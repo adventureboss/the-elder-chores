@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useQuery } from "react-query";
-import { usePocketbase } from "../components/Pocketbase";
+import { usePocketbase } from '../components/Pocketbase';
 import '@patternfly/react-core/dist/styles/base.css';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
