@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PocketBase from "pocketbase";
 import './index.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import '@patternfly/react-core/dist/styles/base.css';
 import 'rpg-awesome/css/rpg-awesome.css';
-import { QueryClientProvider, QueryClient } from "react-query";
-import PocketBase from "pocketbase";
-import {PocketbaseProvider} from "./components/Pocketbase";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { PocketbaseProvider } from "./components/Pocketbase";
 
-const queryClient = new QueryClient();
-const pocketBaseclient = new PocketBase('/');
-
-// This needs to be called on login
-pocketBaseclient.users.authViaEmail('eleani@gmail.com', '123456789');
+export const queryClient = new QueryClient();
+export const pocketBaseClient = new PocketBase('/');
 
 ReactDOM.render(
   <React.StrictMode>
-      <PocketbaseProvider client={pocketBaseclient}>
+      <PocketbaseProvider client={pocketBaseClient}>
           <QueryClientProvider client={queryClient}>
             <App />
           </QueryClientProvider>

@@ -10,6 +10,7 @@ import {
 } from "@patternfly/react-core";
 import { NavLink } from 'react-router-dom';
 import logo from '../img/logo.png'
+import Login from '../pages/Login/Login';
 
 const homePath = "/";
 const dashPath = "/dashboard";
@@ -33,7 +34,8 @@ const Header = () => (
   </Masthead>
 );
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ user, children }) => {
+
   return (
     <React.Fragment>
       <Flex>
@@ -45,7 +47,7 @@ const AppLayout = ({ children }) => {
         <PageSection variant={PageSectionVariants.dark}>
           <Stack style={{ alignItems: "center" }}>
             <StackItem>
-              {children}
+              {user ? children : <Login />}
             </StackItem>
           </Stack>
         </PageSection>
