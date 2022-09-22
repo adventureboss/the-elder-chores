@@ -1,6 +1,6 @@
 import {usePocketbase} from "../components/Pocketbase";
 import {useMutation, useQueryClient} from "react-query";
-import {getCharacterManagerKey} from "./useManager";
+import {getManagerKey} from "./useManager";
 
 const useManagerSetup = () => {
     const client = usePocketbase();
@@ -12,7 +12,7 @@ const useManagerSetup = () => {
         });
     }, {
         onMutate: async ({managerId, managerName}) => {
-            const key = getCharacterManagerKey(client);
+            const key = getManagerKey(client);
 
             await queryClient.cancelQueries(key);
             const previousManager = queryClient.getQueriesData(key);
@@ -29,10 +29,10 @@ const useManagerSetup = () => {
             };
         },
         onError: (_err, _newName, context) => {
-            queryClient.setQueryData(getCharacterManagerKey(client), context.previousSheet);
+            queryClient.setQueryData(getManagerKey(client), context.previousSheet);
         },
         onSettled: () => {
-            queryClient.invalidateQueries(getCharacterManagerKey(client));
+            queryClient.invalidateQueries(getManagerKey(client));
             // Updating the user data requires a reload
             client.users.refresh();
         }

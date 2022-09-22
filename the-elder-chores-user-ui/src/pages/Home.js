@@ -19,8 +19,6 @@ import ChangeNameModal from "../components/ChangeNameModal";
 import {PencilAltIcon} from "@patternfly/react-icons";
 import useNameChanger from "../services/useNameChanger";
 import useManager from "../services/useManager";
-import useManagerSetup from "../services/useManagerSetup";
-import SetupManagerModal from "../components/SetupManagerModal";
 import SetupManagerModalPage from "./SetupManagerModalPage";
 
 const TaskSection = (props) => (

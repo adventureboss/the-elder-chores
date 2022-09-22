@@ -22,7 +22,7 @@ const App = () => {
   // try to refresh the user store on load
   useEffect(() => {
     client.users.refresh();
-  }, []);
+  }, [ client ]);
 
   const getUser = async()=>{
     return client.authStore.model

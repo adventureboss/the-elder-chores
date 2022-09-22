@@ -6,8 +6,7 @@ import {
     Modal,
     ModalVariant, Select,
     SelectOption, SelectVariant, Skeleton,
-    Spinner,
-    TextInput
+    Spinner
 } from "@patternfly/react-core";
 import {useEffect, useState} from "react";
 
@@ -31,7 +30,7 @@ const SetupManagerModal = ({isOpen, isSaving, currentManagerId, onClose, onSave,
                 setManager(matchedManager);
             }
         }
-    }, [managerList]);
+    }, [managerList, manager.userId]);
 
     const options = managerList ? managerList.items.map(m => {
         return <SelectOption
@@ -71,15 +70,15 @@ const SetupManagerModal = ({isOpen, isSaving, currentManagerId, onClose, onSave,
                         await onSave(manager);
                         onClose();
                     }}
-                    isDisabled={isSaving}
+                    isDisabled={isSaving || isLoading}
                 >
-                    {isLoading ? <Spinner size="sm"/> : 'Save'}
+                    {isSaving ? <Spinner size="sm"/> : 'Save'}
                 </Button>,
                 <Button
                     key="no"
                     variant={ButtonVariant.link}
                     onClick={onClose}
-                    isDisabled={isLoading}
+                    isDisabled={isSaving || isLoading}
                 >
                     Cancel
                 </Button>

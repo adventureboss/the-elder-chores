@@ -5,7 +5,7 @@ const useManager = () => {
     const client = usePocketbase();
 
     return useQuery({
-        queryKey: getCharacterManagerKey(client),
+        queryKey: getManagerKey(client),
         queryFn: async () => {
             if (client.authStore.model.profile.manager) {
                 const profiles = await client.records.getList('profiles', undefined, undefined, {
@@ -22,8 +22,8 @@ const useManager = () => {
     });
 };
 
-export const getCharacterManagerKey = (client) => {
-    return `manager-${client.authStore.model.profile.manager}`;
+export const getManagerKey = (client) => {
+    return `manager-for-${client.authStore.model.profile.manager}`;
 }
 
 export default useManager;
