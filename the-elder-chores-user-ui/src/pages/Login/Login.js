@@ -31,14 +31,15 @@ const Login = () => {
     setError(undefined);
     if (register) {
       try {
-        await client.users.create({
-          profile: {
-            name
-          },
+        const user = await client.users.create({
           email: username,
           password: password,
           passwordConfirm: confirmPassword,
         });
+        await client.records.update('profiles', user.profile.id, {
+          name
+        });
+
         await client.users.authViaEmail(username, password);
       } catch (err) {
         if (err.status === 400) {
