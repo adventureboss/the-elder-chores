@@ -39,7 +39,7 @@ const useTaskFinisher = () => {
         onError: (_err, _taskId, context) => {
             queryClient.setQueryData(getTaskKey(client), context.previousTasks)
         },
-        onSettled: () => queryClient.invalidateQueries()
+        onSettled: () => queryClient.invalidateQueries(getTaskKey(client))
     });
 };
 
