@@ -6,6 +6,7 @@ import { Alert } from "@patternfly/react-core";
 const Login = () => {
   const client = usePocketbase();
 
+  const [name, setName] = useState();
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -28,13 +29,17 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     setError(undefined);
-    if (confirmPassword) {
+    if (register) {
       try {
         await client.users.create({
+          profile: {
+            name
+          },
           email: username,
           password: password,
           passwordConfirm: confirmPassword,
         });
+        await client.users.authViaEmail(username, password);
       } catch (err) {
         if (err.status === 400) {
           setError("Something went wrong")
@@ -60,6 +65,10 @@ const Login = () => {
         <Alert isInline variant="danger" title={error} />
       )}
       <form onSubmit={handleSubmit}>
+        { register && <label>
+          <p>Display name</p>
+          <input type="text" onChange={e => setName(e.target.value)} />
+        </label>}
         <label>
           <p>Email</p>
           <input type="text" onChange={e => setUserName(e.target.value)} />
@@ -73,10 +82,14 @@ const Login = () => {
           <button type="submit">Submit</button>
         </div>
       </form>
-      <div id="register">
+      {!register && <div id="register">
         <p>Need an account?</p>
         <button onClick={() => setRegister(true)}>Register</button>
-      </div>
+      </div>}
+      {register && <div>
+        <p>Already have an account?</p>
+        <button onClick={() => setRegister(false)}>Login</button>
+      </div>}
     </div>
   )
 }
