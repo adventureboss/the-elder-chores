@@ -5,7 +5,7 @@ import {
     FlexItem,
     PageSection,
     PageSectionVariants,
-    Skeleton
+    Skeleton, Stack, StackItem
 } from "@patternfly/react-core";
 import StatsSection from "../components/StatsSection";
 import Level from "../components/Level";
@@ -18,6 +18,10 @@ import * as React from 'react';
 import ChangeNameModal from "../components/ChangeNameModal";
 import {PencilAltIcon} from "@patternfly/react-icons";
 import useNameChanger from "../services/useNameChanger";
+import useManager from "../services/useManager";
+import useManagerSetup from "../services/useManagerSetup";
+import SetupManagerModal from "../components/SetupManagerModal";
+import SetupManagerModalPage from "./SetupManagerModalPage";
 
 const TaskSection = (props) => (
     <FlexItem>
@@ -27,15 +31,36 @@ const TaskSection = (props) => (
     </FlexItem>
 );
 
+const RenderManager = ({isLoading, manager, onSetupManager}) => {
+    const managerName = manager?.name && manager.name.trim() !== '' ? manager.name : 'Unknown';
+
+    return (
+        <>
+            {isLoading && <Skeleton/>}
+            {manager ? (
+                <span>
+                    <strong>Manager:</strong> {managerName}
+                    <Button variant={ButtonVariant.plain} onClick={onSetupManager}><PencilAltIcon /></Button>
+                </span>
+            ) : (
+                <Button variant={ButtonVariant.link} onClick={onSetupManager}>Setup manager</Button>
+            )}
+        </>
+    )
+};
+
 const Home = () => {
 
     const tasks = useTasks();
     const sheet = useCharacterSheet();
+    const manager = useManager();
+
     const taskFinisher = useTaskFinisher();
     const nameChanger = useNameChanger();
 
     const [taskToFinish, setTaskToFinish] = React.useState(undefined);
     const [changeNameIsOpen, setChangeNameIsOpen] = React.useState(false);
+    const [setupManager, setSetupManager] = React.useState(false);
 
     return (
         <>
@@ -43,12 +68,23 @@ const Home = () => {
                 <Flex style={{minWidth: 150}} direction={{ default: 'column' }}>
                     <FlexItem>
                         <PageSection variant={ PageSectionVariants.darker }>
-                            { sheet.data?.hero_name ? <>
-                                {sheet.data?.hero_name}
-                                <Button onClick={() => setChangeNameIsOpen(true)} isInline variant={ButtonVariant.plain}>
-                                    <PencilAltIcon />
-                                </Button>
-                            </> : <Skeleton /> }
+                            <Stack>
+                                <StackItem>
+                                    { sheet.data?.hero_name ? <>
+                                        {sheet.data?.hero_name}
+                                        <Button onClick={() => setChangeNameIsOpen(true)} isInline variant={ButtonVariant.plain}>
+                                            <PencilAltIcon />
+                                        </Button>
+                                    </> : <Skeleton /> }
+                                </StackItem>
+                                <StackItem>
+                                    <RenderManager
+                                        isLoading={manager.isLoading}
+                                        manager={manager.data}
+                                        onSetupManager={() => setSetupManager(true)}
+                                    />
+                                </StackItem>
+                            </Stack>
                         </PageSection>
                     </FlexItem>
                     <FlexItem>
@@ -115,6 +151,11 @@ const Home = () => {
                 currentName={sheet.data?.hero_name}
                 onClose={() => setChangeNameIsOpen(false)}
                 onSave={newName => nameChanger.mutateAsync(newName)}
+            />
+            <SetupManagerModalPage
+                isOpen={setupManager}
+                currentManagerId={manager.data?.userId}
+                onClose={() => setSetupManager(false)}
             />
         </>
     );

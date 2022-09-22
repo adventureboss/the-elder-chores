@@ -13,7 +13,7 @@ const useCharacterSheet = () => {
 };
 
 export const getCharacterSheetKey = (client) => {
-    return `character-${client.authStore.model.id}`;
+    return `character-sheet-for-${client.authStore.model.id}`;
 }
 
 export default useCharacterSheet;

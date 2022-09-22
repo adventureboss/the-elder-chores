@@ -6,15 +6,23 @@ import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppLayout from './AppLayout';
 import AppRoutes from './AppRoutes';
+import {useEffect} from "react";
 
 const App = () => {
 
   const client = usePocketbase();
   const queryClient = useQueryClient();
 
-  client.authStore.onChange(() => {
-    queryClient.invalidateQueries("user");
+  useEffect(() => {
+    return client.authStore.onChange(() => {
+      queryClient.invalidateQueries("user");
+    });
   });
+
+  // try to refresh the user store on load
+  useEffect(() => {
+    client.users.refresh();
+  }, []);
 
   const getUser = async()=>{
     return client.authStore.model
