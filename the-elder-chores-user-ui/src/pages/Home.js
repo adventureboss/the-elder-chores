@@ -1,12 +1,23 @@
-import {Flex, FlexItem, PageSection, PageSectionVariants, Skeleton} from "@patternfly/react-core";
+import {
+    Button,
+    ButtonVariant,
+    Flex,
+    FlexItem,
+    PageSection,
+    PageSectionVariants,
+    Skeleton
+} from "@patternfly/react-core";
 import StatsSection from "../components/StatsSection";
 import Level from "../components/Level";
 import Task from "../components/Task";
 import useTasks from "../services/useTasks";
 import useCharacterSheet from "../services/useCharacterSheet";
 import useTaskFinisher from "../services/useTaskFinisher";
-import FinishTaskModal from "./FinishTaskModal";
+import FinishTaskModal from "../components/FinishTaskModal";
 import * as React from 'react';
+import ChangeNameModal from "../components/ChangeNameModal";
+import {PencilAltIcon} from "@patternfly/react-icons";
+import useNameChanger from "../services/useNameChanger";
 
 const TaskSection = (props) => (
     <FlexItem>
@@ -21,7 +32,10 @@ const Home = () => {
     const tasks = useTasks();
     const sheet = useCharacterSheet();
     const taskFinisher = useTaskFinisher();
+    const nameChanger = useNameChanger();
+
     const [taskToFinish, setTaskToFinish] = React.useState(undefined);
+    const [changeNameIsOpen, setChangeNameIsOpen] = React.useState(false);
 
     return (
         <>
@@ -29,7 +43,12 @@ const Home = () => {
                 <Flex style={{minWidth: 150}} direction={{ default: 'column' }}>
                     <FlexItem>
                         <PageSection variant={ PageSectionVariants.darker }>
-                            { sheet.data?.hero_name ?? <Skeleton /> }
+                            { sheet.data?.hero_name ? <>
+                                {sheet.data?.hero_name}
+                                <Button onClick={() => setChangeNameIsOpen(true)} isInline variant={ButtonVariant.plain}>
+                                    <PencilAltIcon />
+                                </Button>
+                            </> : <Skeleton /> }
                         </PageSection>
                     </FlexItem>
                     <FlexItem>
@@ -89,6 +108,13 @@ const Home = () => {
                     setTaskToFinish(undefined);
                 }}
                 onClose={() => setTaskToFinish(undefined)}
+            />
+            <ChangeNameModal
+                isOpen={changeNameIsOpen}
+                isLoading={false}
+                currentName={sheet.data?.hero_name}
+                onClose={() => setChangeNameIsOpen(false)}
+                onSave={newName => nameChanger.mutateAsync(newName)}
             />
         </>
     );
