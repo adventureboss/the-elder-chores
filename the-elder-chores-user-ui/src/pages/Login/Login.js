@@ -33,7 +33,7 @@ const Login = () => {
         await client.users.create({
           email: username,
           password: password,
-          confirmPassword: confirmPassword,
+          passwordConfirm: confirmPassword,
         });
       } catch (err) {
         if (err.status === 400) {
@@ -75,7 +75,7 @@ const Login = () => {
       </form>
       <div id="register">
         <p>Need an account?</p>
-        <button onClick={setRegister(true)}>Register</button>
+        <button onClick={() => setRegister(true)}>Register</button>
       </div>
     </div>
   )
