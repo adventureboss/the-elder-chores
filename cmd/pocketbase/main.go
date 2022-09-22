@@ -38,7 +38,7 @@ func main() {
 		user, _ := e.HttpContext.Get(apis.ContextUserKey).(*models.User)
 
 		// Prevent "users" from updating anything from "sheets" but the "hero_name"
-        if e.Record.Collection().Name == "sheets" && user != nil {
+		if e.Record.Collection().Name == "sheets" && user != nil {
 			updateRequest := make(map[string]interface{})
 			err := json.NewDecoder(e.HttpContext.Request().Body).Decode(&updateRequest)
 			if err != nil {
@@ -53,10 +53,10 @@ func main() {
 
 				return errors.New("invalid update on sheet")
 			}
-        }
+		}
 
 		return nil
-    })
+	})
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
