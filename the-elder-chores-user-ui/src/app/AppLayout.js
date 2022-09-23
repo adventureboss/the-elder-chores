@@ -13,31 +13,10 @@ const homePath = "/";
 const dashPath = "/dashboard";
 const shopPath = "/shop";
 const questsPath = "/quests";
+const managementPath = '/management';
 
 const Header = ({ user }) => {
   const client = usePocketbase();
-
-
-  // return (
-  //   <Masthead>
-  //     <MastheadMain>
-  //       <MastheadBrand>
-  //         <img src={broom} alt="Elder Chores Logo" />
-  //       </MastheadBrand>
-  //       <MastheadContent>
-  //         <Toolbar>
-  //           <ToolbarContent>
-  //             <ToolbarItem><NavLink to={homePath}>Home</NavLink></ToolbarItem>
-  //             <ToolbarItem><NavLink to={shopPath}>Shop</NavLink></ToolbarItem>
-  //             <ToolbarItem><NavLink to={questsPath}>Quests</NavLink></ToolbarItem>
-  //             <ToolbarItem><NavLink to={dashPath}>Restricted area</NavLink></ToolbarItem>
-  //             {user && <ToolbarItem><Button onClick={() => client.authStore.clear()} variant={ButtonVariant.link}>Logout</Button></ToolbarItem>}
-  //           </ToolbarContent>
-  //         </Toolbar>
-  //       </MastheadContent>
-  //     </MastheadMain>
-  //   </Masthead>
-  // )
 
   return (
     <div id="header">
@@ -45,6 +24,8 @@ const Header = ({ user }) => {
         <li className='item'><NavLink to={homePath}>Home</NavLink></li>
         <li className='item'><NavLink to={questsPath}>Quests</NavLink></li>
         <li className='item'><NavLink to={shopPath}>Shop</NavLink></li>
+        <li className='item'><NavLink to={managementPath}>Management</NavLink></li>
+        <li style={{flexGrow: 1}} />
         {user && <li className='item'><NavLink onClick={() => client.authStore.clear()}>Logout</NavLink></li>}
       </ul>
     </div>
