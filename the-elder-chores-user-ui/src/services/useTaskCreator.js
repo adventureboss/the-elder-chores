@@ -26,7 +26,7 @@ const useTaskCreator = () => {
             queryClient.setQueryData(key, old => {
                 const newTaskList = {...old};
                 newTaskList.totalItems = newTaskList.totalItems + 1;
-                newTaskList.items = [newTask, ...newTaskList.items];
+                newTaskList.items = [{...newTask, id:'placeholder'}, ...newTaskList.items];
                 return newTaskList;
             });
 
