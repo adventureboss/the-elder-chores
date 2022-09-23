@@ -6,6 +6,10 @@ button {
     color: black;
 }
 
+.button-wrapper {
+    margin: 15px;
+}
+
 .login-wrapper {
     display: flex;
     flex-direction: column;

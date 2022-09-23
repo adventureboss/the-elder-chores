@@ -1,0 +1,29 @@
+.home-wrapper {
+    margin-left: 15%;
+    display: flex;
+}
+
+.sidebar {
+    background-image: url("../img/sidebar-bcg.png");
+    background-size: cover;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.task {
+    padding: 20px;
+    background-image: url("../img/task-separator.png");
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+.tasks-wrapper {
+    background-image: url("../img/tasks-top.png"), url("../img/tasks-bcg.jpg");
+    background-repeat: no-repeat, repeat-y;
+    background-size: auto, contain;
+    background-position-y: -16px, 0;
+    margin-top: 20px;
+    padding-top: 20px;
+}

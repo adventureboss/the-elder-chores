@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+
 li a{
   color: antiquewhite;
   font-weight: bolder;
+  font-family: 'Stoke', serif;
 }
 
 #root {
@@ -14,6 +17,7 @@ li a{
   background: url("../img/menuBcg.gif") no-repeat left top;
   overflow: hidden;
   margin: 0 auto;
+  box-shadow:0px 5px 10px black;
 }
 
 #header ul {
@@ -58,10 +62,6 @@ li a{
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {

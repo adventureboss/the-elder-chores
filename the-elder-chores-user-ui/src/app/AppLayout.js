@@ -1,20 +1,14 @@
 import * as React from 'react';
 import {
   Button, ButtonVariant,
-  Flex, FlexItem,
-  Masthead,
-  MastheadContent,
-  MastheadMain,
-  MastheadBrand,
-  Page, PageSection, PageSectionVariants, Stack, StackItem,
-  Toolbar,
-  ToolbarContent, ToolbarItem
+  Flex, FlexItem, Stack, StackItem
 } from "@patternfly/react-core";
 import { NavLink } from 'react-router-dom';
-import logo from '../img/logo.png'
+import logo from '../img/the-elder-chores.png'
 import Login from '../pages/Login/Login';
 import { usePocketbase } from "../components/Pocketbase";
-import broom from '../img/broom.png'
+// import broom from '../img/broom.png'
+import './App.css';
 
 const homePath = "/";
 const dashPath = "/dashboard";
@@ -23,6 +17,7 @@ const questsPath = "/quests";
 
 const Header = ({ user }) => {
   const client = usePocketbase();
+
 
   // return (
   //   <Masthead>
@@ -82,15 +77,17 @@ const AppLayout = ({ user, children }) => {
   return (
     <React.Fragment>
       <Flex>
-        <FlexItem style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+        <FlexItem style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '20px' }}>
           <img src={logo} alt="The Elder Chores" />
         </FlexItem>
       </Flex>
       <div>
         <Header />
-        <div>
-          {user ? children : <Login />}
-        </div>
+        <Stack style={{ alignItems: "center" }}>
+          <StackItem>
+            {user ? children : <Login />}
+          </StackItem>
+        </Stack>
       </div>
     </React.Fragment>
   );
