@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  Button, ButtonVariant,
   Flex, FlexItem, Stack, StackItem
 } from "@patternfly/react-core";
 import { NavLink } from 'react-router-dom';
@@ -46,8 +45,7 @@ const Header = ({ user }) => {
         <li className='item'><NavLink to={homePath}>Home</NavLink></li>
         <li className='item'><NavLink to={questsPath}>Quests</NavLink></li>
         <li className='item'><NavLink to={shopPath}>Shop</NavLink></li>
-        <li className='item-long'><NavLink to={dashPath}>Restricted area</NavLink></li>
-        {user && <li className='item'><Button onClick={() => client.authStore.clear()} variant={ButtonVariant.link}>Logout</Button></li>}
+        {user && <li className='item'><NavLink onClick={() => client.authStore.clear()}>Logout</NavLink></li>}
       </ul>
     </div>
   )
@@ -82,7 +80,7 @@ const AppLayout = ({ user, children }) => {
         </FlexItem>
       </Flex>
       <div>
-        <Header />
+        <Header user={user} />
         <Stack style={{ alignItems: "center" }}>
           <StackItem>
             {user ? children : <Login />}
