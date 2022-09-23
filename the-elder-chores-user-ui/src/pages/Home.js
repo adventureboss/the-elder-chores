@@ -23,7 +23,6 @@ import './Pages.css';
 
 const TaskSection = (props) => (
     <FlexItem className="task">
-        {/* <PageSection variant={ PageSectionVariants.darker }> */}
         <PageSection>
             <Task {...props} />
         </PageSection>

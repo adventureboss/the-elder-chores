@@ -10,7 +10,6 @@ import { usePocketbase } from "../components/Pocketbase";
 import './App.css';
 
 const homePath = "/";
-const dashPath = "/dashboard";
 const shopPath = "/shop";
 const questsPath = "/quests";
 const managementPath = '/management';

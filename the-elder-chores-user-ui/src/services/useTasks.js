@@ -6,7 +6,7 @@ const useTasks = (forUsers = true) => {
 
     const queryKey = forUsers ? tasksForUsersKey(client) : tasksForManagersKey(client);
     const filter = forUsers ? `user='${client.authStore.model.id}'` : `manager='${client.authStore.model.id}'`;
-    const sort = forUsers ? 'complete,-id' : '-id';
+    const sort = forUsers ? 'complete,-created' : '-created';
 
     return useInternalTasks(client, queryKey, filter, sort);
 };

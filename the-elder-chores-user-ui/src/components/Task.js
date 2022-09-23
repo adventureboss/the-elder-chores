@@ -65,17 +65,17 @@ const Task = ({taskId, title, description, complete, exp, coins, custom, damage,
                         {c} <ArchiveIcon/>
                     </FlexItem>)).reverse()
             )}
-            { damage && (
+            { !!(damage && damage > 0) && (
                 <FlexItem>
                     { damage } <i style={{verticalAlign: -1}} className="ra ra-crossed-swords" />
                 </FlexItem>
             )}
-            { exp && (
+            { !!(exp && exp > 0) && (
                 <FlexItem>
                     {exp} <strong>XP</strong>
                 </FlexItem>
             ) }
-            { coins && (
+            { !!(coins && coins > 0) && (
                 <FlexItem>
                     { coins } <CoinsIcon/>
                 </FlexItem>
