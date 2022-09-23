@@ -79,7 +79,7 @@ const Login = () => {
           <input type="password" onChange={e => setPassword(e.target.value)} />
         </label>
         {register ? AddRegister() : null}
-        <div>
+        <div className='button-wrapper'>
           <button type="submit">Submit</button>
         </div>
       </form>

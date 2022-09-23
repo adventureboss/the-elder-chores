@@ -4,7 +4,6 @@ import {
     Flex,
     FlexItem,
     PageSection,
-    PageSectionVariants,
     Skeleton, Stack, StackItem
 } from "@patternfly/react-core";
 import StatsSection from "../components/StatsSection";
@@ -20,10 +19,12 @@ import {PencilAltIcon} from "@patternfly/react-icons";
 import useNameChanger from "../services/useNameChanger";
 import useManager from "../services/useManager";
 import SetupManagerModalPage from "./SetupManagerModalPage";
+import './Pages.css';
 
 const TaskSection = (props) => (
-    <FlexItem>
-        <PageSection variant={ PageSectionVariants.darker }>
+    <FlexItem className="task">
+        {/* <PageSection variant={ PageSectionVariants.darker }> */}
+        <PageSection>
             <Task {...props} />
         </PageSection>
     </FlexItem>
@@ -62,10 +63,10 @@ const Home = () => {
 
     return (
         <>
-            <Flex alignItems={{default: "alignItemsFlexStart"} }>
-                <Flex style={{minWidth: 150}} direction={{ default: 'column' }}>
+            <Flex>
+                <div className="sidebar">
                     <FlexItem>
-                        <PageSection variant={ PageSectionVariants.darker }>
+                        <PageSection>
                             <Stack>
                                 <StackItem>
                                     { sheet.data?.hero_name ? <>
@@ -86,7 +87,7 @@ const Home = () => {
                         </PageSection>
                     </FlexItem>
                     <FlexItem>
-                        <PageSection variant={ PageSectionVariants.darker }>
+                        <PageSection>
                             <Level
                                 classname={ sheet.data?.class}
                                 level={sheet.data?.lvl}
@@ -96,7 +97,7 @@ const Home = () => {
                         </PageSection>
                     </FlexItem>
                     <FlexItem>
-                        <PageSection variant={ PageSectionVariants.darker }>
+                        <PageSection>
                             <StatsSection
                                 str={ sheet.data?.str }
                                 dex={ sheet.data?.dex }
@@ -108,12 +109,16 @@ const Home = () => {
                         </PageSection>
                     </FlexItem>
                     <FlexItem>
-                        <PageSection variant={ PageSectionVariants.darker }>
+                        <PageSection>
                             Inventory
                         </PageSection>
                     </FlexItem>
-                </Flex>
-                <Flex direction={{ default: 'column' }} style={{ minWidth: 300, width: 500 }}>
+                </div>
+                <Flex
+                    direction={{ default: 'column' }}
+                    style={{ minWidth: 300, width: 500 }}
+                    className="tasks-wrapper"
+                >
                     { tasks.isLoading === false ? (
                         tasks.data.items.map(t => (
                             <TaskSection
