@@ -10,4 +10,9 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 40px;
+    background-image: url("../../img/loginBcg-cropped.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }

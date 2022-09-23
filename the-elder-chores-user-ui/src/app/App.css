@@ -1,3 +1,39 @@
+li a{
+  color: antiquewhite;
+  font-weight: bolder;
+}
+
+#root {
+  background-image: url("../img/bg.jpg");
+  height: 100%;
+}
+
+#header {
+  width: 597px;
+  height: 94px;
+  background: url("../img/menuBcg.gif") no-repeat left top;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+#header ul {
+  list-style: none;
+  margin: 38px 0 0 30px;
+  overflow: hidden;
+}
+
+.item {
+  width: 80px;
+  height: 40px;
+  display: block;
+  margin: 18px 0 0 10px;
+}
+
+.item-long {
+  width: 150px;
+  margin-top: 18px;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +71,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.display-flex {
+  display: flex;
 }
