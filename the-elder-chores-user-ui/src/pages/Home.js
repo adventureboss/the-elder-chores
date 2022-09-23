@@ -4,7 +4,6 @@ import {
     Flex,
     FlexItem,
     PageSection,
-    PageSectionVariants,
     Skeleton, Stack, StackItem
 } from "@patternfly/react-core";
 import StatsSection from "../components/StatsSection";
