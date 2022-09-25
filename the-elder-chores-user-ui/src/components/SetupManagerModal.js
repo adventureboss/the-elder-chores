@@ -4,18 +4,17 @@ import {
     Form,
     FormGroup,
     Modal,
-    ModalVariant, Select,
-    SelectOption, SelectVariant, Skeleton,
+    ModalVariant,
     Spinner
 } from "@patternfly/react-core";
 import {useEffect, useState} from "react";
+import UserSelector from "./UserSelector";
 
 const SetupManagerModal = ({isOpen, isSaving, currentManagerId, onClose, onSave, managerList, onSetFilter}) => {
 
     const [manager, setManager] = useState({
         userId: currentManagerId
     });
-    const [isSelectOpen, setSelectOpen] = useState(false);
 
     useEffect(() => {
         setManager({
@@ -32,15 +31,6 @@ const SetupManagerModal = ({isOpen, isSaving, currentManagerId, onClose, onSave,
         }
     }, [managerList, manager.userId]);
 
-    const options = managerList ? managerList.items.map(m => {
-        return <SelectOption
-            key={ m.userId }
-            id={ m.userId }
-            value={m.userId}
-        >
-            <>{m.name ? m.name : `Unknown (id: ${m.userId})`}</>
-        </SelectOption>;
-    }) : undefined;
     const isLoading = !managerList;
 
     const onFilter = (_, input) => {
@@ -48,12 +38,8 @@ const SetupManagerModal = ({isOpen, isSaving, currentManagerId, onClose, onSave,
         return undefined;
     }
 
-    const onSelect = (_, selected) => {
-        const matchedManager = managerList.items.find(m => m.userId === selected);
-        if (matchedManager) {
-            setManager(matchedManager);
-            setSelectOpen(false);
-        }
+    const onSelect = (matched) => {
+        setManager(matched);
     }
 
     return (
@@ -90,22 +76,14 @@ const SetupManagerModal = ({isOpen, isSaving, currentManagerId, onClose, onSave,
                     isRequired
                     helperText="Select your manager."
                 >
-                    { !options ? <Skeleton width="40%" /> : (
-                        <Select
-                            variant={SelectVariant.single}
-                            selections={manager.userId}
-                            placeholderText="Select your manager"
-                            hasInlineFilter
-                            onToggle={() => setSelectOpen(prev => !prev)}
-                            isOpen={isSelectOpen}
-                            menuAppendTo={document.body}
-                            isDisabled={isSaving}
-                            onFilter={onFilter}
-                            onSelect={onSelect}
-                        >
-                            { options }
-                        </Select>
-                    ) }
+                    <UserSelector
+                        userList={managerList}
+                        selectedUserId={manager.userId}
+                        placeholderText="Select your manager"
+                        isDisabled={isSaving}
+                        onFilter={onFilter}
+                        onSelect={onSelect}
+                    />
                 </FormGroup>
             </Form>
         </Modal>

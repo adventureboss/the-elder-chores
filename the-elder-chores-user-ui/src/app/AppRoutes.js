@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Quests from "../pages/Quests";
 import Shop from "../pages/Shop";
 import Login from "../pages/Login/Login";
+import Management from "../pages/Management";
 
 const AppRoutes = () => {
   return (
@@ -12,8 +13,9 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/shop" element={<Shop />} />
-      <Route path="/quests" element={<Quests />} /> 
+      <Route path="/quests" element={<Quests />} />
       <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/management" element={<Management />} />
     </Routes>
   );
 }

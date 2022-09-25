@@ -12,7 +12,7 @@ const TaskLayout = ({title, description, complete, onFinishing, children}) => (
         <StackItem>
             <Split>
                 <SplitItem style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                    { complete === undefined ? <Bullseye style={{width: 64, height: 47}}><Spinner size="lg" /></Bullseye> : <CheckboxButton isDisabled={complete} isChecked={complete} onCheck={ onFinishing }/> }
+                    { complete === undefined ? <Bullseye style={{width: 64, height: 47}}><Spinner size="lg" /></Bullseye> : <CheckboxButton isDisabled={complete || !onFinishing} isChecked={complete} onCheck={ onFinishing }/> }
                 </SplitItem>
                 <SplitItem isFilled>
                     <Stack hasGutter>
@@ -32,15 +32,15 @@ const TaskLayout = ({title, description, complete, onFinishing, children}) => (
 
 const emptyFn = () => {};
 
-const Task = ({taskId, title, description, complete, exp, coins, custom, damage, onFinishing}) => {
+const Task = ({taskId, title, description, complete, exp, coins, custom, damage, onFinishing, assignedTo}) => {
 
     const [ isFinishing, setFinishing ] = React.useState(false);
 
-    const onFinishingInternal = async () => {
+    const onFinishingInternal = onFinishing ? async () => {
         setFinishing(true);
         await onFinishing(taskId);
         setFinishing(false);
-    }
+    } : undefined;
 
     const isComplete = isFinishing ? undefined : complete;
 
@@ -65,21 +65,27 @@ const Task = ({taskId, title, description, complete, exp, coins, custom, damage,
                         {c} <ArchiveIcon/>
                     </FlexItem>)).reverse()
             )}
-            { damage && (
+            { !!(damage && damage > 0) && (
                 <FlexItem>
                     { damage } <i style={{verticalAlign: -1}} className="ra ra-crossed-swords" />
                 </FlexItem>
             )}
-            { exp && (
+            { !!(exp && exp > 0) && (
                 <FlexItem>
                     {exp} <strong>XP</strong>
                 </FlexItem>
             ) }
-            { coins && (
+            { !!(coins && coins > 0) && (
                 <FlexItem>
                     { coins } <CoinsIcon/>
                 </FlexItem>
             ) }
+            <FlexItem grow={{default: "grow"}} />
+            { assignedTo && (
+                <FlexItem alignSelf={{default:"alignSelfFlexEnd"}}>
+                    {assignedTo} <span className="ra ra-player" />
+                </FlexItem>
+            )}
         </TaskLayout>
     )
 };
