@@ -1,11 +1,11 @@
 import {usePocketbase} from "../components/Pocketbase";
 import {useMutation, useQueryClient} from "react-query";
-
-const getTaskKey = (client) => `tasks-for-${client.authStore.model.id}`;
+import {tasksForUsersKey} from "./useTasks";
 
 const useTaskFinisher = () => {
     const client = usePocketbase();
     const queryClient = useQueryClient();
+    const key = tasksForUsersKey(client);
 
     return useMutation(async (taskId) => {
         return await client.records.update('tasks', taskId, {
@@ -13,10 +13,10 @@ const useTaskFinisher = () => {
         });
     }, {
         onMutate: async (taskId) => {
-            await queryClient.cancelQueries(['todos']);
-            const previousTasks = queryClient.getQueriesData(getTaskKey(client));
+            await queryClient.cancelQueries(key);
+            const previousTasks = queryClient.getQueriesData(key);
 
-            queryClient.setQueryData(getTaskKey(client), old => {
+            queryClient.setQueryData(key, old => {
                 const index = old.items.findIndex(t => t.id === taskId);
                 if (index !== -1) {
                     const updatedTasks = {...old};
@@ -37,9 +37,9 @@ const useTaskFinisher = () => {
             };
         },
         onError: (_err, _taskId, context) => {
-            queryClient.setQueryData(getTaskKey(client), context.previousTasks)
+            queryClient.setQueryData(key, context.previousTasks)
         },
-        onSettled: () => queryClient.invalidateQueries(getTaskKey(client))
+        onSettled: () => queryClient.invalidateQueries(key)
     });
 };
 
